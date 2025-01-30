@@ -18,17 +18,17 @@
  *
  * @package   SkyVerge/WooCommerce/Payment-Gateway/External_Checkout/Google-Pay
  * @author    SkyVerge
- * @copyright Copyright (c) 2013-2023, SkyVerge, Inc.
+ * @copyright Copyright (c) 2013-2024, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-namespace SkyVerge\WooCommerce\PluginFramework\v5_11_9\Payment_Gateway\External_Checkout\Google_Pay;
+namespace SkyVerge\WooCommerce\PluginFramework\v5_15_3\Payment_Gateway\External_Checkout\Google_Pay;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_9\SV_WC_Helper;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_3\SV_WC_Helper;
 
 defined( 'ABSPATH' ) or exit;
 
-if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_9\\Payment_Gateway\\External_Checkout\\Google_Pay\\Admin' ) ) :
+if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_3\\Payment_Gateway\\External_Checkout\\Google_Pay\\Admin' ) ) :
 
 
 /**
@@ -36,7 +36,8 @@ if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_9\\Payment
  *
  * @since 5.10.0
  */
-class Admin extends \SkyVerge\WooCommerce\PluginFramework\v5_11_9\Payment_Gateway\External_Checkout\Admin {
+#[\AllowDynamicProperties]
+class Admin extends \SkyVerge\WooCommerce\PluginFramework\v5_15_3\Payment_Gateway\External_Checkout\Admin {
 
 
 	/** @var Google_Pay the Google Pay handler instance */
@@ -97,9 +98,17 @@ class Admin extends \SkyVerge\WooCommerce\PluginFramework\v5_11_9\Payment_Gatewa
 			],
 
 			[
+				'id'              => 'sv_wc_google_pay_merchant_id',
+				'title'           => __( 'Merchant ID', 'woocommerce-plugin-framework' ),
+				/** translators: Placeholders: %1$s - <a href="..."> tag, %2$s - </a> tag */
+				'desc'            => sprintf( __( 'A Google merchant identifier issued after registration with the %1$sGoogle Pay & Wallet Console%2$s. 12-18 characters. Required in production environment.', 'woocommerce-plugin-framework' ), '<a href="https://pay.google.com/business/console" target="_blank">', '</a>' ),
+				'type'            => 'text',
+			],
+
+			[
 				'id'      => 'sv_wc_google_pay_display_locations',
 				/* translators: Allow Google Pay button on selected display locations (e.g. cart, checkout, product page...) */
-				'title'   => __( 'Allow Google Pay on', 'woocommerce-plugin-framework' ),
+				'title'   => _x( 'Allow Google Pay on', 'Setting title for a multi-select list dropdown of display locations', 'woocommerce-plugin-framework' ),
 				'type'    => 'multiselect',
 				'class'   => 'wc-enhanced-select',
 				'css'     => 'width: 350px;',

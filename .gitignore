@@ -19,8 +19,10 @@ npm-debug.log
 *.zip
 .cache
 .sass-cache*
+.parcel-cache*
 
 # Tests
 codeception.yml
 .env
 /tests/_data/dump.sql
+.phpunit.cache/
